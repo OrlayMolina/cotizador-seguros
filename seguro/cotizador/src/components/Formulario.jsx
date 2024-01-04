@@ -1,7 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { MARCAS, YEARS, PLANES } from "../constants/index";
+import CotizadorContext from "../context/CotizadorProvider";
 
 const Formulario = () => {
+
+    const { modal, setModal } = useContext(CotizadorContext);
 
     return (
         <>
