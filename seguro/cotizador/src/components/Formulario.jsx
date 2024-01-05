@@ -1,16 +1,28 @@
 import { Fragment} from "react";
 import { MARCAS, YEARS, PLANES } from "../constants/index";
 import useCotizador from "../hooks/useCotizador";
+import Error from "./Error";
 
 const Formulario = () => {
 
-    const { handleChangeData } = useCotizador(); 
+    const { data, handleChangeData, error, setError } = useCotizador(); 
+
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        if(Object.values(data).includes('')) {
+            setError('Todos los campos son obligatorios');
+            return;
+        }
+    }
 
     return (
         
         <>
-
-            <form>
+            {error && <Error/>}
+            <form
+                onSubmit={handleSubmit}
+            >
                 <div className="my-5">
 
                     <label className="block mb-3 font-bold text-gray-400 uppercase">
@@ -21,6 +33,7 @@ const Formulario = () => {
                         name="marca" 
                         className="w-full p-3 bg-white border border-gray-200"
                         onChange={e => handleChangeData(e)}
+                        value={data.marca}
                     >
 
                         <option value="">-- Seleccionar Marca --</option>
@@ -55,6 +68,7 @@ const Formulario = () => {
                             <option 
                                 key={year}
                                 value={year}
+                                data={year}
                             >
                                 {year}
                             </option>
@@ -92,7 +106,7 @@ const Formulario = () => {
 
                 <input
                     type="submit"
-                    className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white cursor-pointer p-3 uppercase font-bold"
+                    className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white cursor-pointer p-3 uppercase font-bold rounded-lg"
                     value="Cotizar"
                 />
             </form>
