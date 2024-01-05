@@ -1,6 +1,6 @@
 import { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
-import { obtenerDiferenciaYear } from '../helpers';
+import { obtenerDiferenciaYear, calcularMarca, calcularPlan, formatearDinero } from '../helpers';
 
 const CotizadorContext = createContext();
 
@@ -13,6 +13,7 @@ const CotizadorProvider = ({ children }) => {
     });
 
     const [error, setError] = useState('');
+    const [resultado, setResultado] = useState(0);
 
     const handleChangeData = e => {
         setData({
@@ -27,7 +28,6 @@ const CotizadorProvider = ({ children }) => {
 
         // Obtener la diferencia de años
         const diferencia = obtenerDiferenciaYear(data.year);
-        console.log(diferencia);
 
         // Por cada año hay que restar el 3%
         resultado -= ((diferencia * 3) * resultado) / 100;
@@ -35,9 +35,17 @@ const CotizadorProvider = ({ children }) => {
         // Americano 15%
         // Europeo 30%
         // Asiatico 5%
+        resultado *= calcularMarca(data.marca);
 
         // Basico aumenta 20%
         // Completo 50%
+        resultado *= calcularPlan(data.plan);
+        
+        // Formatear dinero
+        resultado = formatearDinero(resultado); 
+
+        setResultado(resultado);
+
     }
 
     return(
