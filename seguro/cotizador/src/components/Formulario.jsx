@@ -14,6 +14,9 @@ const Formulario = () => {
             setError('Todos los campos son obligatorios');
             return;
         }
+
+        setError('');
+        /// TODO: Cotizar el seguro
     }
 
     return (
