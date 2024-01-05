@@ -23,3 +23,13 @@ Aplicación con Vite, Tailwind CSS, JavaScript y React que permite a los usuario
 
 
 </a>
+
+
+<b>Proyecto terminado</b>
+
+<a href="https://orlay-andres-molina-proyecto12.netlify.app/" target="_blank">
+
+![react](https://github.com/OrlayMolina/cotizador-seguros/assets/111409267/1de26f12-ae3c-404d-bb40-b6902e93aa34)
+
+
+</a>
